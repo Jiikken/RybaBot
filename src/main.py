@@ -29,10 +29,11 @@ async def handler_messages(message: Message):
     chat_type = message.chat.type
 
     if chat_type.lower() == "private":
-            await message.answer("Я дружелюбная рыбка, но тут говорить не могу :)")
-            return
+        await message.answer("Я дружелюбная рыбка, но тут говорить не могу :)")
+        return
 
     if message.forward_from_chat and message.forward_from_chat.id == get_group_id():
+        print(1)
         text: str = random.choice(POSTS_PHRASES)
         await message.answer(
             text,
