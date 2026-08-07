@@ -33,7 +33,6 @@ async def handler_messages(message: Message):
         return
 
     if message.forward_from_chat and message.forward_from_chat.id == get_group_id():
-        print(1)
         text: str = random.choice(POSTS_PHRASES)
         await message.answer(
             text,
