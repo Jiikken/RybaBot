@@ -1,12 +1,13 @@
 import asyncio
+import os
 import random
 
 from aiogram import Bot, Dispatcher
-from aiogram.types import Message
-from aiogram.filters import CommandStart
+from aiogram.types import Message, FSInputFile
+from aiogram.filters import CommandStart, Command
 
 from .config import get_bot_token, get_group_id
-from .phrases import PHRASES, POSTS_PHRASES
+from .constants import PHRASES, POSTS_PHRASES, FISH_DICT
 from .security import get_random_number
 
 bot = Bot(token=get_bot_token())
@@ -20,6 +21,23 @@ async def main():
 @dp.message(CommandStart())
 async def handler_start(message: Message):
     await message.answer("Я рыбка: буль-буль-буль")
+
+@dp.message(Command("ryba"))
+async def handler_ryba(message: Message):
+    fish_types = FISH_DICT
+
+    random_key = random.choice(list(fish_types.keys()))
+
+    current_dir = os.getcwd()
+    photo_path = f"{current_dir}/src/photos/{random_key}.jpg"
+    if os.path.exists(photo_path):
+        photo = FSInputFile(photo_path)
+        await message.answer_photo(
+            photo=photo,
+            caption=f"Ты {fish_types[random_key]}",
+            reply_to_message_id=message.message_id
+        )
+
 
 @dp.message()
 async def handler_messages(message: Message):
