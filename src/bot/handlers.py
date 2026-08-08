@@ -5,9 +5,9 @@ from aiogram import Dispatcher
 from aiogram.types import Message, FSInputFile
 from aiogram.filters import CommandStart, Command
 
-from core.config import get_group_id
-from data.constants import PHRASES, POSTS_PHRASES, FISH_DICT
-from core.security import get_random_number
+from src.core.config import get_group_id
+from src.data.constants import PHRASES, POSTS_PHRASES, FISH_DICT
+from src.core.security import get_random_number
 
 quantity_message: int = 0
 fixed_number: int = get_random_number()
