@@ -6,9 +6,9 @@ from aiogram import Bot, Dispatcher
 from aiogram.types import Message, FSInputFile
 from aiogram.filters import CommandStart, Command
 
-from .config import get_bot_token, get_group_id
-from .constants import PHRASES, POSTS_PHRASES, FISH_DICT
-from .security import get_random_number
+from config import get_bot_token, get_group_id
+from constants import PHRASES, POSTS_PHRASES, FISH_DICT
+from security import get_random_number
 
 bot = Bot(token=get_bot_token())
 dp = Dispatcher()
@@ -38,7 +38,6 @@ async def handler_ryba(message: Message):
             reply_to_message_id=message.message_id
         )
 
-
 @dp.message()
 async def handler_messages(message: Message):
     global quantity_message
@@ -50,7 +49,7 @@ async def handler_messages(message: Message):
         await message.answer("Я дружелюбная рыбка, но тут говорить не могу :)")
         return
 
-    if message.forward_from_chat and message.forward_from_chat.id == get_group_id():
+    if message.forward_from_chat and message.forward_from_chat.id == int(get_group_id()):
         text: str = random.choice(POSTS_PHRASES)
         await message.answer(
             text,
