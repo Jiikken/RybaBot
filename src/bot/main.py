@@ -2,8 +2,8 @@ import asyncio
 
 from aiogram import Bot, Dispatcher
 
-from config import get_bot_token
-from handlers import register_handlers
+from core.config import get_bot_token
+from bot.handlers import register_handlers
 
 bot = Bot(token=get_bot_token())
 dp = Dispatcher()

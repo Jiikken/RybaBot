@@ -5,9 +5,9 @@ from aiogram import Dispatcher
 from aiogram.types import Message, FSInputFile
 from aiogram.filters import CommandStart, Command
 
-from config import get_group_id
+from core.config import get_group_id
 from constants import PHRASES, POSTS_PHRASES, FISH_DICT
-from security import get_random_number
+from core.security import get_random_number
 
 quantity_message: int = 0
 fixed_number: int = get_random_number()
@@ -26,7 +26,7 @@ async def handler_ryba(message: Message):
     random_key = random.choice(list(fish_types.keys()))
 
     current_dir = os.getcwd()
-    photo_path = f"{current_dir}/src/photos/{random_key}.jpg"
+    photo_path = f"{current_dir}/src/media/photos/{random_key}.jpg"
     if os.path.exists(photo_path):
         photo = FSInputFile(photo_path)
         await message.answer_photo(
