@@ -5,9 +5,9 @@ from aiogram import Bot, Dispatcher
 from aiogram.types import Message
 from aiogram.filters import CommandStart
 
-from config import get_bot_token, get_group_id
-from phrases import PHRASES, POSTS_PHRASES
-from security import get_random_number
+from .config import get_bot_token, get_group_id
+from .phrases import PHRASES, POSTS_PHRASES
+from .security import get_random_number
 
 bot = Bot(token=get_bot_token())
 dp = Dispatcher()
