@@ -6,7 +6,7 @@ from aiogram.types import Message, FSInputFile
 from aiogram.filters import CommandStart, Command
 
 from core.config import get_group_id
-from constants import PHRASES, POSTS_PHRASES, FISH_DICT
+from data.constants import PHRASES, POSTS_PHRASES, FISH_DICT
 from core.security import get_random_number
 
 quantity_message: int = 0
