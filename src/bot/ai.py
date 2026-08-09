@@ -37,7 +37,7 @@ async def handler_private_message(message: Message):
     
     try:
         response = await client.aio.models.generate_content_stream(
-            model="gemini-3.5-flash",
+            model="gemini-3.6-flash",
             contents=contents,
             config=types.GenerateContentConfig(
                 system_instruction=system_instruction
