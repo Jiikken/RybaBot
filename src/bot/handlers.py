@@ -8,17 +8,19 @@ from aiogram.filters import CommandStart, Command
 from src.core.config import get_group_id
 from src.data.constants import PHRASES, POSTS_PHRASES, FISH_DICT
 from src.core.security import get_random_number
+from src.bot.ai import handler_private_message
 
 quantity_message: int = 0
 fixed_number: int = get_random_number()
 
+
 def register_handlers(dp: Dispatcher):
     dp.message.register(handler_start, CommandStart())
     dp.message.register(handler_ryba, Command("ryba"))
-    dp.message.register(handler_messages)
+    dp.message.register(handle_message)
 
 async def handler_start(message: Message):
-    await message.answer("Я рыбка: буль-буль-буль")
+    await message.answer("Я AI рыбка: буль-буль-буль")
 
 async def handler_ryba(message: Message):
     fish_types = FISH_DICT
@@ -35,14 +37,14 @@ async def handler_ryba(message: Message):
             reply_to_message_id=message.message_id
         )
 
-async def handler_messages(message: Message):
+async def handle_message(message: Message):
     global quantity_message
     global fixed_number
 
     chat_type = message.chat.type
 
     if chat_type.lower() == "private":
-        await message.answer("Я дружелюбная рыбка, но тут говорить не могу :)")
+        handler_private_message(message)
         return
 
     if message.forward_from_chat and message.forward_from_chat.id == int(get_group_id()):
