@@ -64,12 +64,12 @@ async def handler_private_message(message: Message):
             match = re.search(r'retry in (\d+\.?\d*)s', error_msg)
             if match:
                 wait_time = float(match.group(1))
-                await bot_message.edit_text(f"⏳ Лимит запросов превышен. Ждем {int(wait_time)} секунд...")
+                await bot_message.edit_text(f"⏳ Лимит запросов на сегодня превышен. Ждем {int(wait_time)} секунд...")
                 await asyncio.sleep(wait_time + 1)
             else:
-                await bot_message.edit_text("❌ Превышен лимит запросов. Попробуйте позже.")
+                await bot_message.edit_text("❌ Превышен лимит запросов на сегодня. Попробуйте позже.")
         else:
-            await bot_message.edit_text(f"❌ Другая ошибка: {error_msg}")
+            await bot_message.edit_text(f"❌ Ошибка: {error_msg}")
         return
     
     await bot_message.edit_text(full_text)

@@ -9,7 +9,7 @@ bot = Bot(token=get_bot_token())
 dp = Dispatcher()
 
 async def main():
-    register_handlers(dp=dp)
+    register_handlers(dp=dp, bot=bot)
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
