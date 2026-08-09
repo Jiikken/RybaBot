@@ -44,7 +44,7 @@ async def handle_message(message: Message):
     chat_type = message.chat.type
 
     if chat_type.lower() == "private":
-        handler_private_message(message)
+        await handler_private_message(message)
         return
 
     if message.forward_from_chat and message.forward_from_chat.id == int(get_group_id()):
