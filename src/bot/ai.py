@@ -9,10 +9,14 @@ from google.genai import types
 load_dotenv()
 
 
-async def handler_private_message(message: Message):
-    client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-    conversation_history = {}
+os.environ['HTTP_PROXY'] = os.getenv("PROXY_URL")
+os.environ['HTTPS_PROXY'] = os.getenv("PROXY_URL")
 
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+
+conversation_history = {}
+
+async def handler_private_message(message: Message):
     chat_id = message.chat.id
     user_text = message.text
     
