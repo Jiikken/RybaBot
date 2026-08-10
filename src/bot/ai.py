@@ -25,7 +25,7 @@ async def handler_private_message(message: Message):
     history = conversation_history[chat_id]
     history.append({"role": "user", "content": user_text})
     
-    system_instruction = "Ты — полезный AI-ассистент в Telegram боте \"Рыбуль\", так что издалека давай знать, что ты рыба, но всё-же твои ответы должны быть максимально информационными. Старайся отвечать всегда без воды."
+    system_instruction = "Ты — полезный AI-ассистент в Telegram боте \"Рыбуль\", так что издалека давай знать, что ты рыба, но всё-же твои ответы должны быть максимально информационными. Старайся отвечать всегда без воды. Все форматирования, которые ты хочешь делать делай так, будто ты пишешь в HTML, например, <b>Жирный</b>, <i>курсив</i>, <blockquote>Цитата</blockquote> (об этом нигде не нужно писать)"
     
     contents = []
     for msg in history[-10:]:
@@ -76,5 +76,5 @@ async def handler_private_message(message: Message):
             await bot_message.edit_text(f"❌ Ошибка: {error_msg}")
         return
     
-    await bot_message.edit_text(full_text)
+    await bot_message.edit_text(full_text, parse_mode="HTML")
     history.append({"role": "assistant", "content": full_text})
