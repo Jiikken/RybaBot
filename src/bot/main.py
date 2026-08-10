@@ -1,11 +1,18 @@
+import os
 import asyncio
+from dotenv import load_dotenv
 
 from aiogram import Bot, Dispatcher
+from aiogram.client.session.aiohttp import AiohttpSession
 
 from src.core.config import get_bot_token
 from src.bot.handlers import register_handlers
 
-bot = Bot(token=get_bot_token())
+load_dotenv()
+
+
+session = AiohttpSession(proxy=os.getenv("PROXY_URL"))
+bot = Bot(token=get_bot_token(), session=session)
 dp = Dispatcher()
 
 async def main():
