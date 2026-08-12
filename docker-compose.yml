@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  bot:
+    build: .
+    container_name: rybatgbot
+    volumes:
+      - ./logs:/rybatgbot/logs
+    env_file:
+      - .env 
+    restart: unless-stopped
