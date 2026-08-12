@@ -4,8 +4,10 @@ import random
 from aiogram.types import Message, FSInputFile
 
 from src.data.constants import FISH_DICT
+from src.utils.logs import log_decorator
 
 
+@log_decorator
 async def handle_ryba(message: Message):
     fish_types = FISH_DICT
 

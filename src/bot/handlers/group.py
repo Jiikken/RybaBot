@@ -7,11 +7,13 @@ from src.core.config import get_group_id
 from src.data.constants import PHRASES, POSTS_PHRASES
 from src.core.security import get_random_number
 from src.bot.ai import handler_private_message
+from src.utils.logs import log_decorator
 
 
 quantity_message: int = 0
 fixed_number: int = get_random_number()
 
+@log_decorator
 async def handle_message(message: Message, bot: Bot):
     global quantity_message
     global fixed_number

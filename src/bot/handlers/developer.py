@@ -3,15 +3,19 @@ from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 
+from src.utils.logs import log_decorator
+
 
 class DeveloperStates(StatesGroup):
     waiting_for_message = State()
 
+@log_decorator
 async def handle_developer_messsage(message: Message, bot: Bot, state: FSMContext):
     await message.answer("Напишите своё сообщение <b>Кириллу</b> в следующем сообщении, буль ✍🏻",
                          parse_mode="HTML")
     await state.set_state(DeveloperStates.waiting_for_message)
 
+@log_decorator
 async def process_developer_message(message: Message, bot: Bot, state: FSMContext):
     await message.answer("Сообщение <b>отправлено!</b>💬",
                          parse_mode="HTML")

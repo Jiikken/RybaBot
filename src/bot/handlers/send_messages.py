@@ -1,7 +1,9 @@
 from aiogram import Bot
 from aiogram.types import Message
+from src.utils.logs import log_decorator
 
 
+@log_decorator
 async def handle_send_message(message: Message, bot: Bot):
     await message.answer("Сообщение <b>отправлено!</b>",
                          parse_mode="HTML")
