@@ -1,6 +1,7 @@
 from datetime import datetime
 import functools
 import logging
+import os
 from pathlib import Path
 
 from aiogram.types import Message
@@ -17,12 +18,13 @@ formatter = logging.Formatter(
     datefmt="%Y-%m-%d %H:%M:%S"
 )
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+print(BASE_DIR)
 LOG_DIR = BASE_DIR / "logs"
 LOG_DIR.mkdir(exist_ok=True)
 
 BOT_LOG_FILE = LOG_DIR / "bot.log"
-MESSAGE_LOG_FILE = LOG_DIR / "bot.log"
+MESSAGE_LOG_FILE = LOG_DIR / "messages.log"
 
 file_handler = logging.FileHandler(str(BOT_LOG_FILE), encoding="utf-8")
 file_handler.setLevel(logging.INFO)
@@ -33,6 +35,10 @@ file_messages_handler = logging.FileHandler(str(MESSAGE_LOG_FILE), encoding="utf
 file_messages_handler.setLevel(logging.INFO)
 file_messages_handler.setFormatter(formatter)
 logger_messages.addHandler(file_messages_handler)
+
+logger.info(f"Логи пишутся в: {BOT_LOG_FILE}, {MESSAGE_LOG_FILE}")
+logger.info(f"Папка существует: {BOT_LOG_FILE.exists()}, {MESSAGE_LOG_FILE.exists()}")
+logger.info(f"Права на запись: {os.access(BOT_LOG_FILE, os.W_OK)}, {os.access(MESSAGE_LOG_FILE, os.W_OK)}")
 
 def log_decorator(func):
     @functools.wraps(func)
