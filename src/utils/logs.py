@@ -1,6 +1,7 @@
 from datetime import datetime
 import functools
 import logging
+from pathlib import Path
 
 from aiogram.types import Message
 
@@ -16,12 +17,19 @@ formatter = logging.Formatter(
     datefmt="%Y-%m-%d %H:%M:%S"
 )
 
-file_handler = logging.FileHandler("bot.log", encoding="utf-8")
+BASE_DIR = Path(__file__).resolve().parent.parent
+LOG_DIR = BASE_DIR / "logs"
+LOG_DIR.mkdir(exist_ok=True)
+
+BOT_LOG_FILE = LOG_DIR / "bot.log"
+MESSAGE_LOG_FILE = LOG_DIR / "bot.log"
+
+file_handler = logging.FileHandler(str(BOT_LOG_FILE), encoding="utf-8")
 file_handler.setLevel(logging.INFO)
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 
-file_messages_handler = logging.FileHandler("messages.log", encoding="utf-8")
+file_messages_handler = logging.FileHandler(str(MESSAGE_LOG_FILE), encoding="utf-8")
 file_messages_handler.setLevel(logging.INFO)
 file_messages_handler.setFormatter(formatter)
 logger_messages.addHandler(file_messages_handler)
