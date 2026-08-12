@@ -7,7 +7,7 @@ from src.core.config import get_group_id
 from src.data.constants import PHRASES, POSTS_PHRASES
 from src.core.security import get_random_number
 from src.bot.ai import handler_private_message
-from src.utils.logs import log_decorator
+from src.utils.logs import log_decorator, log_message
 
 
 quantity_message: int = 0
@@ -20,8 +20,9 @@ async def handle_message(message: Message, bot: Bot):
 
     chat_type = message.chat.type
 
+    log_message(message, chat_type.upper())
+
     if chat_type.lower() == "private":
-        print(f"{message.from_user.username} [id={message.from_user.id}] - {message.text}")
         await handler_private_message(message)
         return
 
